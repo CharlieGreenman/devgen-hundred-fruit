@@ -1,0 +1,29 @@
+{
+  "name": "devgen-hundred-fruit-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/devgen-hundred-fruit-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/devgen-hundred-fruit-e2e/cypress.json",
+        "devServerTarget": "devgen-hundred-fruit:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "devgen-hundred-fruit:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/devgen-hundred-fruit-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["devgen-hundred-fruit"]
+}

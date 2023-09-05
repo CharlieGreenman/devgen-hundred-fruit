@@ -1,0 +1,95 @@
+{
+  "name": "devgen-hundred-fruit",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/devgen-hundred-fruit/src",
+  "prefix": "devgen-hundred-fruit",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/devgen-hundred-fruit",
+        "index": "apps/devgen-hundred-fruit/src/index.html",
+        "main": "apps/devgen-hundred-fruit/src/main.ts",
+        "polyfills": "apps/devgen-hundred-fruit/src/polyfills.ts",
+        "tsConfig": "apps/devgen-hundred-fruit/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/devgen-hundred-fruit/src/favicon.ico",
+          "apps/devgen-hundred-fruit/src/assets"
+        ],
+        "styles": ["apps/devgen-hundred-fruit/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/devgen-hundred-fruit/src/environments/environment.ts",
+              "with": "apps/devgen-hundred-fruit/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "devgen-hundred-fruit:build:production"
+        },
+        "development": {
+          "browserTarget": "devgen-hundred-fruit:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "devgen-hundred-fruit:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/devgen-hundred-fruit/src/**/*.ts",
+          "apps/devgen-hundred-fruit/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/devgen-hundred-fruit"],
+      "options": {
+        "jestConfig": "apps/devgen-hundred-fruit/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
